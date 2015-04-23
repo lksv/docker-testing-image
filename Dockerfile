@@ -87,6 +87,20 @@ RUN chmod 700 /home/vagrant/.ssh && \
 
 RUN echo 'vagrant  ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
+
+
+ADD scripts/ /tmp/chef
+
+RUN sudo apt-get -y -qq install bash openssl vim wget
+RUN sudo git config --global url."https://github.com".insteadOf git://github.com
+RUN curl -L https://www.opscode.com/chef/install.sh | sudo bash -s -- -v 11.16.2-1
+RUN mkdir -p /tmp/chef/travis-cookbook/assets/cache
+
+RUN cd /tmp/chef/travis-cookbook && sudo chef-solo -c /tmp/chef/solo.rb -j /tmp/chef/standard_solo.json
+
+
+
+
 CMD ["/usr/sbin/sshd", "-D"]
 
 #ADD start.sh /start.sh

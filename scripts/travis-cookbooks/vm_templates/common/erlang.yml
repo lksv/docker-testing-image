@@ -1,0 +1,6 @@
+recipes:
+  - kerl::binary
+  - kiex
+  - rebar
+  - system_info
+  - sweeper
