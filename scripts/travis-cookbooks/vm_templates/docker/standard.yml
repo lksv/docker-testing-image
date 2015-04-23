@@ -1,0 +1,8 @@
+json:
+  postgresql:
+    ssl: false
+  travis_build_environment:
+    update_hosts: false
+recipes:
+  - mysql::client_deb
+  - mysql::server_deb
